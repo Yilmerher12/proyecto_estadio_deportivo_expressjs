@@ -41,6 +41,6 @@ El código fuente del proyecto no se almacena centralizado en la rama principal,
 bc-expressjs/
 ├──  README.md (Rama: main - Portada principal)
 └── [Ramas de trabajo]
-    ├── 🌿 week-01 (Fundamentos y configuración inicial)
+    ├── 🌿 week-01 (Fundamentos y proyecto crudo en node.js)
     ├── 🌿 week-02 (Rutas, controladores y manejo de datos)
     └── 🌿 week-0...
