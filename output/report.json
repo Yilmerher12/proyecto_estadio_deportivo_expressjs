@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-07-28T04:15:47.847Z",
+  "appliedFilter": null,
+  "summary": {
+    "total": 10,
+    "active": 8,
+    "inactive": 2,
+    "averagePrice": 6300,
+    "mostExpensive": {
+      "id": "c002",
+      "name": "Hamburguesa sencilla",
+      "type": "comida",
+      "price": 12000,
+      "stock": 15,
+      "available": true
+    },
+    "cheapest": {
+      "id": "c006",
+      "name": "Agua botella",
+      "type": "bebida",
+      "price": 3000,
+      "stock": 40,
+      "available": true
+    },
+    "categories": [
+      "comida",
+      "bebida",
+      "snack"
+    ]
+  },
+  "items": [
+    {
+      "id": "c001",
+      "name": "Hot dog",
+      "type": "comida",
+      "price": 8000,
+      "stock": 25,
+      "available": true
+    },
+    {
+      "id": "c002",
+      "name": "Hamburguesa sencilla",
+      "type": "comida",
+      "price": 12000,
+      "stock": 15,
+      "available": true
+    },
+    {
+      "id": "c003",
+      "name": "Nachos con queso",
+      "type": "comida",
+      "price": 9000,
+      "stock": 0,
+      "available": false
+    },
+    {
+      "id": "c004",
+      "name": "Palomitas",
+      "type": "comida",
+      "price": 6000,
+      "stock": 30,
+      "available": true
+    },
+    {
+      "id": "c005",
+      "name": "Gaseosa 400ml",
+      "type": "bebida",
+      "price": 4000,
+      "stock": 50,
+      "available": true
+    },
+    {
+      "id": "c006",
+      "name": "Agua botella",
+      "type": "bebida",
+      "price": 3000,
+      "stock": 40,
+      "available": true
+    },
+    {
+      "id": "c007",
+      "name": "Cerveza",
+      "type": "bebida",
+      "price": 7000,
+      "stock": 0,
+      "available": false
+    },
+    {
+      "id": "c008",
+      "name": "Jugo natural",
+      "type": "bebida",
+      "price": 5000,
+      "stock": 12,
+      "available": true
+    },
+    {
+      "id": "c009",
+      "name": "Helado",
+      "type": "snack",
+      "price": 5500,
+      "stock": 8,
+      "available": true
+    },
+    {
+      "id": "c010",
+      "name": "Barra de chocolate",
+      "type": "snack",
+      "price": 3500,
+      "stock": 20,
+      "available": true
+    }
+  ]
+}
