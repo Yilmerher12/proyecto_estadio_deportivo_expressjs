@@ -1,46 +1,80 @@
-# Estadio Deportivo — Mis entregas de `bc-expressjs`
+# Semana 02 — Estadio deportivo (Express 5 + TypeScript)
 
-> **Programa:** Tecnólogo en Análisis y Desarrollo de Software (ADSO)  
-> **Institución:** SENA  
-> **Aprendiz:** Yilmer Hernández Camargo  
-> **Ficha:** 3228970  
+Este es mi proyecto de la semana 2 del bootcamp bc-expressjs: una API REST con CRUD completo
+sobre el catálogo de concesiones que ofrece un estado deportivo como comida, mercancia, bebidas, etc,
+usando Express 5 y TypeScript, sin base de datos todavía — todo vive en un array en memoria considerado una mock databse.
 
----
+La semana era sobre Express en sí: middlewares, rutas, códigos de estado HTTP y el ciclo
+request/response, así que el proyecto es una API bien básica pero completa: los 5 endpoints
+CRUD sobre `products`, con validación mínima y manejo de errores.
 
-## Presentación del Proyecto
+## Mi dominio
 
-Este repositorio documenta el progreso, entrega y evolución de mis actividades prácticas para el **Bootcamp de Express.js** durante el presente trimestre. 
+Sigo con **Estadio deportivo** (`events`, `seats`, `tickets`, `concessions`). Esta
+semana el recurso es `Product`: `id`, `name`, `description`,`price`, `type`, `stock`, `available`.
 
-Para fomentar un aprendizaje práctico y diversificado, el bootcamp asigna un dominio de negocio único a cada aprendiz. En mi caso, el proyecto gira en torno a la gestión e infraestructura lógica de un **Estadio Deportivo**, simulando las operaciones de backend necesarias para coordinar eventos masivos (partidos, conciertos, espectáculos) y sus servicios asociados.
+## Qué hice
 
----
+- `src/types.ts`: interfaz `ConcessionItem` + `CreateItemDto` / `UpdateItemDto`.
+- `src/store.ts`: store en memoria con `getAll`, `getById`, `create`, `update`, `remove`,
+  precargado con 4 products basicos y generales encontrados en estadios deportivos.
+- `src/routes/products.routes.ts`: los 5 endpoints CRUD, con validación básica en `POST`
+  (exige `name`, `price` y `type`) y 404 cuando el id no existe.
+- `src/app.ts`: `express.json()`, un logger que imprime método/ruta/status/duración, un
+  `/health`, las rutas de `products`, un handler 404 para rutas no encontradas y un error
+  handler global al final.
+- `src/server.ts`: arranca el servidor y cierra limpio con `SIGTERM`/`SIGINT`.
 
-## Entidades del Dominio
+## Endpoints
 
-El sistema se estructura conceptualmente alrededor de cuatro entidades principales:
+| Método | Ruta | Descripción | Status |
+|--------|------|-------------|--------|
+| GET | `/api/v1/items` | Listar todos los producto/items | 200 |
+| GET | `/api/v1/items/:id` | Obtener un producto/item por id | 200 / 404 |
+| POST | `/api/v1/items` | Crear un producto/item | 201 / 400 |
+| PUT | `/api/v1/items/:id` | Actualizar un producto/item | 200 / 404 |
+| DELETE | `/api/v1/items/:id` | Eliminar un producto/item | 204 / 404 |
 
-| Módulo | Descripción | Casos de Uso Principales |
-| :--- | :--- | :--- |
-| **events** | Gestión de programación para partidos, conciertos u otros espectáculos masivos. | Crear fechas, definir aforos y consultar estado de eventos. |
-| **seats** | Representación física y distribución de las zonas del estadio. | Asignación de sectores, filas y numeración de asientos. |
-| **tickets** | Proceso de reserva, venta y validación para el acceso al recinto. | Control de disponibilidad, compra y emisión de entradas. |
-| **concessions** | Gestión de comercios internos y servicios de consumo dentro del estadio. | Catálogo de productos, control de inventario y órdenes. |
+## Cómo correrlo
 
-*Nota: La implementación de cada módulo se aborda de forma progresiva según los requerimientos entregables de cada semana.*
+```bash
+pnpm install
+cp .env.example .env
+pnpm dev
+```
 
----
+## Cómo probarlo con curl
 
-## Estructura y Navegación del Repositorio
+```bash
+curl http://localhost:3000/api/v1/items
 
-El código fuente del proyecto no se almacena centralizado en la rama principal, sino estructurado mediante **ramas por entregable (`feature branches`)**:
+curl -X POST http://localhost:3000/api/v1/items \
+  -H "Content-Type: application/json" \
+  -d '{ "name": "Millonarios FC shirt", "description": "Millonarios FC jersey for 2024/2025 season", "type": "clothes", "price": 200000, "stock": 23, "available": true }'
 
-* **`main`**: Funciona exclusivamente como portada, documentación general y punto de entrada al repositorio.
-* **`week-XX`**: Ramas independientes para cada entrega semanal (ejemplo: `week-01`, `week-02`). Cada una contiene la implementación del código funcional, pruebas y configuraciones correspondientes a ese módulo.
+curl http://localhost:3000/api/v1/items/1
 
-```text
-bc-expressjs/
-├──  README.md (Rama: main - Portada principal)
-└── [Ramas de trabajo]
-    ├── 🌿 week-01 (Fundamentos y configuración inicial)
-    ├── 🌿 week-02 (Rutas, controladores y manejo de datos)
-    └── 🌿 week-0...
+curl -X PUT http://localhost:3000/api/v1/items/4 \
+  -H "Content-Type: application/json" \
+  -d '{ "price": 33000 }'
+
+curl -X DELETE http://localhost:3000/api/v1/items/1
+```
+
+## Cómo verificar que compila
+
+```bash
+pnpm build
+```
+
+## Entregables de esta semana
+
+- Servidor funcional (`pnpm dev` levanta en `localhost:3000`)
+- Los 5 endpoints CRUD implementados
+- Validación básica en `POST`/`PUT`
+- Middlewares: `express.json()`, logger, 404 handler, error handler
+- `pnpm build` sin errores de TypeScript
+- Este README con la descripción del dominio
+
+La rúbrica de evaluación de esta semana está en el repo del bootcamp
+([ergrato-dev/bc-expressjs](https://github.com/ergrato-dev/bc-expressjs)).
